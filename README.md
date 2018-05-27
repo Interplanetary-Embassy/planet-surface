@@ -26,7 +26,7 @@ Nice to have:
 #### Caveats
 
 * Based upon [https://github.com/juliango202/TerrainVer](https://github.com/juliango202/TerrainVer)
-* Currently "bundled" (js-bundle) with lots of "hacks" (line 3565 for example)
+* Currently "bundled" `js-bundle.js` with lots of "hacks" (line 3565 for example)
 
 -----------------
 
