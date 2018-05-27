@@ -27,6 +27,7 @@ Nice to have:
 
 * Based upon [https://github.com/juliango202/TerrainVer](https://github.com/juliango202/TerrainVer)
 * Currently "bundled" `js-bundle.js` with lots of "hacks" (line 3565 for example)
+* __Configuration is currently hardcoded into `index.html` lines 13+__
 
 -----------------
 
