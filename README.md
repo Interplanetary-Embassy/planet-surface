@@ -32,9 +32,9 @@ Nice to have:
 
 Nonetheless, it can and does work - with some existing examples:
 
-### Uncornia [ 92, 9, 10 ]
+### Unicornia [ 92, 9, 10 ]
 
-![Uncornia](img/unicornia-surface.png)
+![Unicornia](img/unicornia-surface.png)
 
 ### Smallville [ 5, 3, 79 ]
 
