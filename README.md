@@ -23,7 +23,14 @@ Nice to have:
 * Surface properties match planet hex location
 * Ability to move characters around the landscape
 
-Existing examples:
+#### Caveats
+
+* Based upon [https://github.com/juliango202/TerrainVer](https://github.com/juliango202/TerrainVer)
+* Currently "bundled" (js-bundle) with lots of "hacks" (line 3565 for example)
+
+-----------------
+
+Nonetheless, it can and does work - with some existing examples:
 
 ### Uncornia [ 92, 9, 10 ]
 
