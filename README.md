@@ -17,6 +17,7 @@ Todo:
 Nice to have:
 
 * _New readme based on newly available functionality ..._
+* __Replace character blobs with relevant planetary species :-)__
 * Different background types
 * Setting suns and rising moons based on time of day
 * Introducing day and night cycles / background types
