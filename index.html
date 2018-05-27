@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<head>
+    
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <meta name="robots" content="all">
+  <title>Interplanetary Embassy - Surface View</title>
+  <link href="css/surface.css" rel="stylesheet">  
+    
+    <script src="libs/jquery-2.1.0.min.js"></script>
+    <script>
+    
+    var planet_surface_settings = {
+        type: 'type-2',
+        
+        /* Droneriders */
+        grass: '#8B9FEE', // Rural
+        waves: '#97CD2D', // Ocean
+        ground: '#368716', // Urban,
+        space: '#704F50',
+        sun: '#08E8DE',
+        
+        /* Smallville */
+        grass: '#CFB53B', // Rural
+        waves: '#0BDA51', // Ocean
+        ground: '#C6726B', // Urban,
+        space: '#126B40',
+        sun: '#64CCDB',
+        
+        /* Zion */
+        grass: '#B38007', // Rural
+        waves: '#708090', // Ocean
+        ground: '#7A89B8', // Urban,
+        space: '#B8B56A',
+        sun: '#8B00DF',
+        
+        /* Unicornia */
+        grass: '#9370DB', // Rural
+        waves: '#C154C1', // Ocean
+        ground: '#956387', // Urban,
+        space: '#622F30',
+        sun: '#ECF245',
+        
+        wind: 10,
+        surface: 16,
+        noiseResolution: 10,
+        noiseResolutionBlack: 10,
+        noiseThreshold: 10,
+        blackToAlpha: true,
+        players: 1
+    };
+    const DEFAULT_OPTIONS$2 = {
+        debug: false,
+        groundImg: null,
+        backgroundImg: null,
+        charaImg: null,
+        charaWidth: null,
+        charaHeight: null,
+        borderWidth: planet_surface_settings.surface,
+        borderColor: planet_surface_settings.grass,
+        nbCharas: planet_surface_settings.players,
+        waveDisplacement: planet_surface_settings.wind,
+        waveFps: 20,
+        waveColor: planet_surface_settings.waves,
+        waveDuration: 0
+    };
+    $(document).ready(function()
+    {
+        $('.l4 .hills div').css('background-color', planet_surface_settings.grass);
+        $('.l3 .hills div').css('background-color', planet_surface_settings.ground);
+        $('#background').css('background-color', planet_surface_settings.ground);
+        $('.landscape').css('background', planet_surface_settings.space);
+        $('.moon').css('background-color', planet_surface_settings.sun);
+    });
+    </script>
+
+</head>
+
+<body>
+    
+
+  <div class='landscape'>
+  <div id="sky"></div>
+  <div class='moon' data-bg="#FFFFFF"></div>
+   <div class='layer l2'>
+    <div class='hills'>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <div class='layer l4'>
+    <div class='hills'>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <div class='layer l1'>
+    <div class='hills'>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <div class='layer l3'>
+    <div class='hills'>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  </div>
+
+  <div id="result" class="loading">
+    <div id="loading-msg">Loading...</div>
+    <div id="background"></div>
+    <canvas id="bgcanvas" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; z-index: 10;"></canvas>
+    <canvas id="bgwater" style="position: absolute; left: 0; bottom: 0; right: 0; z-index: 11;opacity: 0.24;"></canvas>
+    <canvas id="fgcanvas" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; z-index: 12;"></canvas>
+    <canvas id="fgwater" style="position: absolute; left: 0; bottom: 0; right: 0; z-index: 13;opacity: 0.45;"></canvas>
+  </div>
+
+  <form name="genform" id="genform" class="hide">
+    <table id="gen-tb">
+      <tr>
+        <td>
+          <button id="gen" disabled>Generate &#8634;</button>
+          <i id="timer-terrain-total" class="timer"></i>
+        </td>
+        <td>
+          Smaller noise <input id="noiseres" name="noiseres" type="range" min="10" max="45" value="25"> Larger noise
+        </td>
+        <td>
+          <input type="radio" name="selshape" id="type1" value="type-1" />
+          <label for="type1"><img class="terrtype" src="./img/type-1.png"></label>
+
+          <input type="radio" name="selshape" id="type2" value="type-2" checked />
+          <label for="type2"><img class="terrtype" src="./img/type-2.png"></label>
+
+          <input type="radio" name="selshape" id="type3" value="type-3" />
+          <label for="type3"><img class="terrtype" src="./img/type-3.png"></label>
+        </td>
+      </tr>
+    </table>
+
+  </form>
+    
+    <canvas class="pull-right step-canvas loading hide" id="canvas-terrain"></canvas>
+    
+    <canvas class="pull-right step-canvas loading hide" id="canvas-perlin"></canvas>
+    
+    <canvas class="pull-right step-canvas loading hide" id="canvas-fperlin"></canvas>
+    
+    <canvas class="pull-right step-canvas loading hide" id="canvas-rperlin"></canvas>
+    
+    <canvas class="pull-right step-canvas loading hide" id="canvas-dilation"></canvas>
+    
+    <canvas class="pull-right step-canvas loading hide" id="canvas-paintbg"></canvas>
+    
+    <canvas class="pull-right step-canvas loading hide" id="canvas-erosion"></canvas>
+    
+    <canvas class="pull-right step-canvas loading hide" id="canvas-magnify" style="background: #000;"></canvas>
+    
+    <canvas class="pull-right step-canvas loading hide" id="canvas-render"></canvas>
+    
+    <canvas class="pull-right step-canvas loading hide" id="canvas-surface"></canvas>
+    
+    <canvas class="pull-right step-canvas loading hide" id="canvas-chara"></canvas>
+    
+      <form name="charasform" id="charasform" class="hide">
+        Less characters <input id="nbcharas" name="nbcharas" type="range" min="0" max="40" value="10"> More characters
+      </form>
+
+    
+
+  <script type="text/javascript">
+    // Redirect if trailing slash is missing
+    var url = window.location.href;
+    if (url.toLowerCase().endsWith('terrainver')) {
+      window.location.replace(url + '/');
+    }
+
+    // Fallback mode will display screenshots if the demo does not work
+    function fallbackMode() {
+      var result = document.getElementById('result');
+      if (!result.className.match(/\bloading\b/)) return; // Demo seems to be working
+
+      var stepCanvases = document.getElementsByClassName('step-canvas');
+      for(var i = 0; i < stepCanvases.length; i++) {
+        var canvas = stepCanvases.item(i);
+        var img = document.createElement('img');
+        img.src = 'img/demo/fallback/' + canvas.id + '.png';
+        img.className = 'pull-right step-canvas';
+        canvas.parentNode.replaceChild(img, canvas);
+      }
+
+      var img = document.createElement('img');
+      img.src = 'img/demo/fallback/result.png';
+      result.parentNode.replaceChild(img, result);
+
+      document.body.className += ' fallback-mode';
+    }
+    setTimeout(function(){ fallbackMode() }, 7000);
+  </script>
+
+  <script type="text/javascript" src="js-bundle.js"></script>
+
+</body>
