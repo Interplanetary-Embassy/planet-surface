@@ -22,3 +22,13 @@ Nice to have:
 * One surface screen per hex tile of planet
 * Surface properties match planet hex location
 * Ability to move characters around the landscape
+
+Existing examples:
+
+### Uncornia [ 92, 9, 10 ]
+
+![Uncornia](img/unicornia-surface.png)
+
+### Smallville [ 5, 3, 79 ]
+
+![Uncornia](img/smallville-surface.png)

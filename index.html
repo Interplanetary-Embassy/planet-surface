@@ -19,13 +19,7 @@
         ground: '#368716', // Urban,
         space: '#704F50',
         sun: '#08E8DE',
-        
-        /* Smallville */
-        grass: '#CFB53B', // Rural
-        waves: '#0BDA51', // Ocean
-        ground: '#C6726B', // Urban,
-        space: '#126B40',
-        sun: '#64CCDB',
+        seed: 123456,
         
         /* Zion */
         grass: '#B38007', // Rural
@@ -33,6 +27,7 @@
         ground: '#7A89B8', // Urban,
         space: '#B8B56A',
         sun: '#8B00DF',
+        seed: 345678,
         
         /* Unicornia */
         grass: '#9370DB', // Rural
@@ -40,7 +35,23 @@
         ground: '#956387', // Urban,
         space: '#622F30',
         sun: '#ECF245',
+        seed: 456789,
         
+        /* Smallville */
+        grass: '#CFB53B', // Rural
+        waves: '#0BDA51', // Ocean
+        ground: '#C6726B', // Urban,
+        space: '#126B40',
+        sun: '#64CCDB',
+        seed: 234567,
+        
+        /* 
+        
+        CONSTANTS - FOR NOW
+        
+        CAN USE SEEDS TO GENERATE FIXED RANDOM FIGURES BELOW
+        
+        */
         wind: 10,
         surface: 16,
         noiseResolution: 10,
@@ -66,6 +77,10 @@
     };
     $(document).ready(function()
     {
+        // DIRTY HACK FOR UPDATING BACKGROUND
+        // REAL HACK FOR UPDATING GROUND CAN SEEN HERE:
+        // js-bundle.js:3565 (generates new img at runtime) :-(
+        // All of this need to be vastly improved ...
         $('.l4 .hills div').css('background-color', planet_surface_settings.grass);
         $('.l3 .hills div').css('background-color', planet_surface_settings.ground);
         $('#background').css('background-color', planet_surface_settings.ground);
