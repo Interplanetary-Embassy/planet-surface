@@ -16,6 +16,7 @@ Todo:
 
 Nice to have:
 
+* _New readme based on newly available functionality ..._
 * Different background types
 * Setting suns and rising moons based on time of day
 * Introducing day and night cycles / background types
